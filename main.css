@@ -1,0 +1,50 @@
+.form{
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+.home{
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+  .wrapper {
+    margin: 0 auto;
+    margin-top: 10%;
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-gap: 10px;
+    background-color: #fff;
+    color: #444;
+  }
+  
+  .box {
+      
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  .vid{
+    padding: 200px;
+    margin-top: -10%;
+  }
+
+  .subject{
+    color: white;
+    padding-left: 200px;
+  }
+
+  .profile{
+    color: white;
+    padding-left: 700px;
+  }
+  
+  #imgContentColor{
+    color: #fff;
+  }

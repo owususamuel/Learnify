@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Design System for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Argon Design System - Free Design System for Bootstrap 4</title>
+  <!-- Favicon -->
+  <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="./assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
+  <link href="./assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Argon CSS -->
+  <link type="text/css" href="./assets/css/argon.css?v=1.0.1" rel="stylesheet">
+  <!-- Docs CSS -->
+  <link type="text/css" href="./assets/css/docs.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <main>
+    <div class="position-relative">
+      <!-- Hero for FREE version -->
+      <section class="section section-lg section-hero section-shaped">
+        <!-- Background circles -->
+        <div class="shape shape-style-1 shape-primary">
+          <span class="span-150"></span>
+          <span class="span-50"></span>
+          <span class="span-50"></span>
+          <span class="span-75"></span>
+          <span class="span-100"></span>
+          <span class="span-75"></span>
+          <span class="span-50"></span>
+          <span class="span-100"></span>
+          <span class="span-50"></span>
+          <span class="span-100"></span>
+        </div>
+        <div class="container shape-container d-flex align-items-center py-lg">
+          <div class="col px-0">
+            <div class="row align-items-center justify-content-center">
+              <!-- <div class="col-lg-6 text-center">
+                <img src="./assets/img/brand/white.png" style="width: 200px;" class="img-fluid">
+                <p class="lead text-white">A beautiful Design System for Bootstrap 4. It's Free and Open Source.</p>
+                <div class="btn-wrapper mt-5"> -->
+
+
+              <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+              <a href="#" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0" id="fileSelect">Upload Content</a>
+
+              <a href="https://demo.cloudinary.com/live/" class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                <span class="btn-inner--icon"><i class="fa fa-video"></i></span>
+                <span class="btn-inner--text">Live Stream</span>
+              </a>
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+            <label>Live Stream URL</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Paste live stream url here">
+            <small id="emailHelp" class="form-text text-muted">This link will appear on the student platform</small>
+          </div>
+          <button id="submitBtn" type="submit" class="btn btn-primary" onclick="myFunction()">Submit</button>
+        </div>
+
+        <div class="col-sm-3 col-6">
+          <img src="./assets/img/theme/team-1-800x800.jpg" alt="Rounded image" class="img-fluid rounded shadow" style="width: 150px;" id="imageid">
+          <small class="d-block text-uppercase font-weight-bold mb-4" id="imgContentColor">Image</small>
+        </div>
+
+    </div>
+    <!-- SVG separator -->
+    <div class="separator separator-bottom separator-skew zindex-100">
+      <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
+    </div>
+    </section>
+    </div>
+
+    <script>
+      function uploadContent(content) {
+        // create form data for submission         
+        let formData = new FormData();
+        formData.append('upload_preset', 'myfiles');
+        formData.append('api_key', "111389488865182");
+        formData.append('file', content);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", 'https://api.cloudinary.com/v1_1/111389488865182/auto/upload');
+
+        xhr.onreadystatechange = function () {
+          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            var response = JSON.parse(this.response);
+            console.log(response);
+            document.getElementById("imageid").src=response["url"];
+
+            alert("Video uploaded to your cloudinary media library");
+          }
+        }
+
+        xhr.send(formData);
+      }
+    </script>
+
+  </main>
+
+  <!-- Core -->
+  <script src="./assets/vendor/jquery/jquery.min.js"></script>
+  <script src="./assets/vendor/popper/popper.min.js"></script>
+  <script src="./assets/vendor/bootstrap/bootstrap.min.js"></script>
+  <script src="./assets/vendor/headroom/headroom.min.js"></script>
+  <!-- Optional JS -->
+  <script src="./assets/vendor/onscreen/onscreen.min.js"></script>
+  <script src="./assets/vendor/nouislider/js/nouislider.min.js"></script>
+  <script src="./assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <!-- Argon JS -->
+  <script src="./assets/js/argon.js?v=1.0.1"></script>
+
+  <script type="text/javascript">
+    function myFunction() {
+
+      localStorage.removeItem('streamlink');
+
+      var myData = document.getElementById("exampleInputEmail1").value;
+
+      localStorage.setItem('streamlink', myData);
+
+      console.log(myData)
+    }
+
+
+
+    const cloudName = 'realgobs';
+    const unsignedUploadPreset = 'myfiles';
+
+    var fileSelect = document.getElementById("fileSelect"),
+      fileElem = document.getElementById("fileElem");
+
+    fileSelect.addEventListener("click", function (e) {
+      if (fileElem) {
+        fileElem.click();
+      }
+      e.preventDefault(); // prevent navigation to "#"
+    }, false);
+
+    // ************************ Drag and drop ***************** //
+    function dragenter(e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+
+    function dragover(e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+
+    dropbox = document.getElementById("dropbox");
+    dropbox.addEventListener("dragenter", dragenter, false);
+    dropbox.addEventListener("dragover", dragover, false);
+    dropbox.addEventListener("drop", drop, false);
+
+    function drop(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      var dt = e.dataTransfer;
+      var files = dt.files;
+
+      handleFiles(files);
+    }
+
+    // *********** Upload file to Cloudinary ******************** //
+    function uploadFile(file) {
+      var url = `https://api.cloudinary.com/v1_1/${realgobs}/upload`;
+      var xhr = new XMLHttpRequest();
+      var fd = new FormData();
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+      // Reset the upload progress bar
+      document.getElementById('progress').style.width = 0;
+
+      // Update progress (can be used to show progress indicator)
+      xhr.upload.addEventListener("progress", function (e) {
+        var progress = Math.round((e.loaded * 100.0) / e.total);
+        document.getElementById('progress').style.width = progress + "%";
+
+        console.log(`fileuploadprogress data.loaded: ${e.loaded},
+  data.total: ${e.total}`);
+      });
+
+      xhr.onreadystatechange = function (e) {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          // File uploaded successfully
+          var response = JSON.parse(xhr.responseText);
+          // https://res.cloudinary.com/cloudName/image/upload/v1483481128/public_id.jpg
+          var url = response.secure_url;
+          // Create a thumbnail of the uploaded image, with 150px width
+          var tokens = url.split('/');
+          tokens.splice(-2, 0, 'w_150,c_scale');
+          var img = new Image(); // HTML5 Constructor
+          img.src = tokens.join('/');
+          img.alt = response.public_id;
+          document.getElementById('gallery').appendChild(img);
+        }
+      };
+
+      fd.append('upload_preset', unsignedUploadPreset);
+      fd.append('tags', 'browser_upload'); // Optional - add tag for image admin in Cloudinary
+      fd.append('file', file);
+      xhr.send(fd);
+    }
+
+    // *********** Handle selected files ******************** //
+    function handleFiles(files) {
+      console.log(files);
+      for (var i = 0; i < files.length; i++) {
+        //uploadContent(files[i])
+        uploadContent(files[i]);
+      }
+    };
+
+
+  </script>
+</body>
+
+</html>
